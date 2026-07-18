@@ -115,11 +115,11 @@
                         <div class="config-grid">
                             <div class="field">
                                 <label for="cfg-model-name">LLM Model Name</label>
-                                <input type="text" id="cfg-model-name" required>
+                                <input type="text" id="cfg-model-name" value="mistral-small-latest" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-model-provider">LLM Provider</label>
-                                <input type="text" id="cfg-model-provider" required>
+                                <input type="text" id="cfg-model-provider" value="mistralai" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-api-key">LLM API Key (Optional)</label>
@@ -127,35 +127,35 @@
                             </div>
                             <div class="field">
                                 <label for="cfg-embedding-model">Embedding Model Name</label>
-                                <input type="text" id="cfg-embedding-model" required>
+                                <input type="text" id="cfg-embedding-model" value="mistral-embed" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-chunk-size">Chunk Size (chars)</label>
-                                <input type="number" id="cfg-chunk-size" required>
+                                <input type="number" id="cfg-chunk-size" value="1000" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-chunk-overlap">Chunk Overlap (chars)</label>
-                                <input type="number" id="cfg-chunk-overlap" required>
+                                <input type="number" id="cfg-chunk-overlap" value="200" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-top-k">Retrieval Top K</label>
-                                <input type="number" id="cfg-top-k" required>
+                                <input type="number" id="cfg-top-k" value="5" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-fetch-k">Retrieval Fetch K (MMR)</label>
-                                <input type="number" id="cfg-fetch-k" required>
+                                <input type="number" id="cfg-fetch-k" value="20" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-threshold">Score Threshold (0.0 to 1.0)</label>
-                                <input type="number" id="cfg-threshold" step="0.05" min="0" max="1" required>
+                                <input type="number" id="cfg-threshold" value="0.5" step="0.05" min="0" max="1" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-context-chars">Max Context Characters</label>
-                                <input type="number" id="cfg-context-chars" required>
+                                <input type="number" id="cfg-context-chars" value="30000" required>
                             </div>
                             <div class="field">
                                 <label for="cfg-review-cycles">Max Review Cycles</label>
-                                <input type="number" id="cfg-review-cycles" required>
+                                <input type="number" id="cfg-review-cycles" value="4" required>
                             </div>
                         </div>
                         <button type="submit" class="btn primary-btn" style="margin-top: 1rem; width: auto; align-self: flex-start;">Save Configuration</button>
