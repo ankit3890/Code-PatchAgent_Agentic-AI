@@ -1,6 +1,6 @@
-# AutoPR-AI
+# Code Patch Agent
 
-AutoPR-AI is an agentic pair-programming assistant that automates code analysis, feature planning, code generation, and iterative safety/logic reviews. By combining a multi-agent workflow with a Retrieval-Augmented Generation (RAG) code indexing database, AutoPR-AI can index arbitrary Git repositories, read relevant source files, draft patches, and validate them prior to application.
+Code Patch Agent is an agentic pair-programming assistant that automates code analysis, feature planning, code generation, and iterative safety/logic reviews. By combining a multi-agent workflow with a Retrieval-Augmented Generation (RAG) code indexing database, Code Patch Agent can index arbitrary Git repositories, read relevant source files, draft patches, and validate them prior to application.
 
 > [!WARNING]
 > **Active Development Warning**: This project is under active development. Some core components—specifically syntax validators for non-Python languages, multi-file validation loops, and complex multi-agent iterations—are experimental. Certain tasks may trigger validation errors or logic review rejections. If the reviewer agent rejects a draft patch throughout all cycles, adjust your request or prompt and run the task again.
@@ -9,7 +9,7 @@ AutoPR-AI is an agentic pair-programming assistant that automates code analysis,
 
 ## 1. System Architecture & Workflows
 
-AutoPR-AI utilizes a four-tier architecture:
+Code Patch Agent utilizes a four-tier architecture:
 1. **Configuration Layer (`config.py`)**: Central settings provider built with Pydantic.
 2. **RAG / Code Search Layer (`rag/`)**: Language-aware splitting and Max Marginal Relevance (MMR) retrieval using ChromaDB.
 3. **Multi-Agent Coding Pipeline (`agents/`)**: Specialized LLM nodes constrained by Pydantic structured output validation.
