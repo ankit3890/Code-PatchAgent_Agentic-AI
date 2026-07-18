@@ -27,6 +27,12 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from config import settings
+
+# Serverless environment modifications (must execute before other imports evaluate settings)
+if os.environ.get("VERCEL"):
+    settings.persist_directory = "/tmp/vector_db"
+    settings.repos_dir = "/tmp/repos"
+
 from git_utils.clone_repo import RepoManager
 from rag.indexer import RepositoryIndexer
 from rag.retriever import CodeRetriever
@@ -37,10 +43,6 @@ from agents.reviewer import ReviewerAgent
 from prompts.reviewer.schema import ReviewState
 from prompts.writer.schema import WriterResult
 
-# Serverless environment modifications
-if os.environ.get("VERCEL"):
-    settings.persist_directory = "/tmp/vector_db"
-    settings.repos_dir = "/tmp/repos"
 
 SENSITIVE_PATTERNS = [
     (re.compile(r'(Authorization:\s*Bearer\s+)[a-zA-Z0-9_\-\.]{10,}', re.IGNORECASE), r'\1[REDACTED_BEARER_TOKEN]'),

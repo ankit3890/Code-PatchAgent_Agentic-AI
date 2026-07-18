@@ -17,9 +17,10 @@ class CodeRetriever:
     def __init__(
         self,
         vector_store: Optional[CodeVectorStore] = None,
-        persist_directory: str = settings.persist_directory,
+        persist_directory: str | None = None,
         collection_name: str = "default",
     ):
+        persist_directory = persist_directory or settings.persist_directory
         """
         Args:
             vector_store:

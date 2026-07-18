@@ -33,10 +33,10 @@ class CodeVectorStore:
 
     def __init__(
         self,
-        persist_directory: str = settings.persist_directory,
+        persist_directory: str | None = None,
         collection_name: str = "default",
     ):
-        self.persist_directory = persist_directory
+        self.persist_directory = persist_directory or settings.persist_directory
         self.collection_name = collection_name
 
         Path(self.persist_directory).mkdir(parents=True, exist_ok=True)

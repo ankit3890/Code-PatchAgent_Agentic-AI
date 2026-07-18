@@ -19,11 +19,11 @@ class RepositoryIndexer:
         self,
         repo_url: str,
         collection_name: str,
-        persist_directory: str = settings.persist_directory,
+        persist_directory: str | None = None,
     ):
         self.repo_url = repo_url
         self.collection_name = collection_name
-        self.persist_directory = persist_directory
+        self.persist_directory = persist_directory or settings.persist_directory
         self.manifest_path = (
             Path(persist_directory) / f"{collection_name}_manifest.json"
         )
