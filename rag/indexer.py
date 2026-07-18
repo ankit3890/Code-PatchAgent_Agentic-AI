@@ -25,7 +25,7 @@ class RepositoryIndexer:
         self.collection_name = collection_name
         self.persist_directory = persist_directory or settings.persist_directory
         self.manifest_path = (
-            Path(persist_directory) / f"{collection_name}_manifest.json"
+            Path(self.persist_directory) / f"{collection_name}_manifest.json"
         )
 
     def index(self, force: bool = False) -> CodeVectorStore:
