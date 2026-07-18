@@ -1,0 +1,70 @@
+
+# LLM & Agent Framework
+langchain
+langgraph
+langchain-core
+langchain-community
+langchain-openai
+langchain-google-genai
+
+langchain-mistralai
+langchain_groq
+langchain-tools
+
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
+
+# Vector Database
+chromadb
+
+# Embeddings
+sentence-transformers
+
+# Git & GitHub
+GitPython
+PyGithub
+
+# Document Loading & Parsing
+unstructured
+pypdf
+tiktoken
+
+# Environment Variables
+python-dotenv
+
+# Data Validation
+pydantic
+
+
+# Tokenization / Transformers
+transformers
+
+# HTTP Requests
+requests
+
+
+# Code Parsing
+tree-sitter
+tree-sitter-languages
+
+
+# Testing
+pytest
+
+# Formatting & Linting
+black
+ruff
+isort
+
+# Progress Bars
+tqdm
+
+# Utilities
+typing_extensions
+rich
+
+# Web Framework & Server
+fastapi
+uvicorn
+pydantic-settings

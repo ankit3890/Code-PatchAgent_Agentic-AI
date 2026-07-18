@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPR-AI Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>AutoPR-AI Dashboard</h1>
+        <p class="subtitle">Agentic Multi-Agent Code Generation & Optimization Workspace</p>
+    </header>
+
+    <main class="app-container">
+        <!-- Sidebar controls -->
+        <aside class="sidebar">
+            <section class="card">
+                <h2>Index Repository</h2>
+                <form id="index-form">
+                    <div class="field">
+                        <label for="repo-url">GitHub Repository URL</label>
+                        <input type="url" id="repo-url" placeholder="https://github.com/user/repo" required>
+                    </div>
+                    <div class="field">
+                        <label for="col-name">Collection Name</label>
+                        <input type="text" id="col-name" placeholder="e.g. my-repo" required>
+                    </div>
+                    <button type="submit" class="btn primary-btn" id="index-btn">Index Repository</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>Run Programming Task</h2>
+                <form id="run-form">
+                    <div class="field">
+                        <label for="collection-select">Select Vector Collection</label>
+                        <select id="collection-select" required>
+                            <option value="">-- Select Collection --</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="task-request">Goal / Task Description</label>
+                        <textarea id="task-request" rows="5" placeholder="e.g. Add JWT authentication to the Flask backend" required></textarea>
+                    </div>
+                    <button type="submit" class="btn success-btn" id="run-btn">Generate Patch</button>
+                </form>
+            </section>
+        </aside>
+
+        <!-- Main execution display panel -->
+        <section class="main-content">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="tab-pipeline" id="tab-btn-pipeline">Agent Pipeline</button>
+                <button class="tab-btn" data-tab="tab-logs" id="tab-btn-logs">System Logs</button>
+                <button class="tab-btn" data-tab="tab-plan" id="tab-btn-plan" disabled>Execution Plan</button>
+                <button class="tab-btn" data-tab="tab-patches" id="tab-btn-patches" disabled>Generated Patches</button>
+                <button class="tab-btn" data-tab="tab-config" id="tab-btn-config">Configuration</button>
+            </div>
+
+            <!-- Tab 0: Agent Pipeline (Visual Step Progression) -->
+            <div class="tab-content active" id="tab-pipeline">
+                <div class="pipeline-container" id="pipeline-container">
+                    <div class="pipeline-placeholder" id="pipeline-placeholder">
+                        <p>No active session. Select a collection and input a task description on the left, then click "Generate Patch" to watch the agent execution pipeline step-by-step.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 1: Terminal Logs -->
+            <div class="tab-content" id="tab-logs">
+                <div class="terminal-card">
+                    <div class="terminal-header">
+                        <span class="terminal-title">System Console</span>
+                        <button class="btn text-btn" id="clear-logs-btn">Clear logs</button>
+                    </div>
+                    <div class="terminal-body" id="logs-terminal">
+                        <div class="log-line info">Waiting for user task...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Execution Plan -->
+            <div class="tab-content" id="tab-plan">
+                <div class="card">
+                    <h2>Plan Details</h2>
+                    <div class="plan-meta">
+                        <div class="meta-item"><strong>Goal:</strong> <span id="plan-goal">-</span></div>
+                        <div class="meta-item"><strong>Task Type:</strong> <span id="plan-task-type">-</span></div>
+                    </div>
+                    <h3>Required Context Concepts</h3>
+                    <ul id="plan-context" class="list-context"></ul>
+                    <h3>Proposed Subtasks</h3>
+                    <ol id="plan-subtasks" class="list-subtasks"></ol>
+                </div>
+            </div>
+
+            <!-- Tab 3: Patches Viewer -->
+            <div class="tab-content" id="tab-patches">
+                <div class="card">
+                    <h2>Generated Code Changes</h2>
+                    <p class="patch-summary-text"><strong>Summary:</strong> <span id="patch-summary">-</span></p>
+                    <div id="diffs-container" class="diffs-container">
+                        <!-- Individual file diffs will render here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: Configuration Manager -->
+            <div class="tab-content" id="tab-config">
+                <div class="card">
+                    <h2>Configuration Settings</h2>
+                    <div id="config-status" class="config-status"></div>
+                    <form id="config-form" style="display: flex; flex-direction: column;">
+                        <div class="config-grid">
+                            <div class="field">
+                                <label for="cfg-model-name">LLM Model Name</label>
+                                <input type="text" id="cfg-model-name" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-model-provider">LLM Provider</label>
+                                <input type="text" id="cfg-model-provider" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-api-key">LLM API Key (Optional)</label>
+                                <input type="password" id="cfg-api-key" placeholder="Using default key or environment">
+                            </div>
+                            <div class="field">
+                                <label for="cfg-embedding-model">Embedding Model Name</label>
+                                <input type="text" id="cfg-embedding-model" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-chunk-size">Chunk Size (chars)</label>
+                                <input type="number" id="cfg-chunk-size" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-chunk-overlap">Chunk Overlap (chars)</label>
+                                <input type="number" id="cfg-chunk-overlap" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-top-k">Retrieval Top K</label>
+                                <input type="number" id="cfg-top-k" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-fetch-k">Retrieval Fetch K (MMR)</label>
+                                <input type="number" id="cfg-fetch-k" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-threshold">Score Threshold (0.0 to 1.0)</label>
+                                <input type="number" id="cfg-threshold" step="0.05" min="0" max="1" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-context-chars">Max Context Characters</label>
+                                <input type="number" id="cfg-context-chars" required>
+                            </div>
+                            <div class="field">
+                                <label for="cfg-review-cycles">Max Review Cycles</label>
+                                <input type="number" id="cfg-review-cycles" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn primary-btn" style="margin-top: 1rem; width: auto; align-self: flex-start;">Save Configuration</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

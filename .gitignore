@@ -1,0 +1,32 @@
+# Python cache and compile files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment configurations containing keys
+.env
+.env.*
+
+# Local data directories
+vector_db/
+repos/
+*.manifest.json
+
+# IDE / System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Vercel deployments cache
+.vercel/
