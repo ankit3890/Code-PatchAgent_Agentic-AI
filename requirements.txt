@@ -13,6 +13,7 @@ langchain-chroma
 
 # Vector Database
 chromadb
+pysqlite3-binary
 
 # Git & GitHub
 GitPython
