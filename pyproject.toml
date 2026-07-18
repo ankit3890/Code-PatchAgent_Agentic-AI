@@ -3,10 +3,10 @@ name = "autopr-ai"
 version = "0.1.0"
 description = "Agentic multi-agent code generation and logic review pipeline"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "chromadb>=1.5.9",
-    "pysqlite3-binary>=0.5.6",
+    "pysqlite3-binary>=0.5.0",
     "gitpython>=3.1.50",
     "langchain>=1.3.12",
     "langchain-chroma>=1.1.0",
