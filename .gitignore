@@ -12,6 +12,7 @@ __pycache__/
 venv/
 ENV/
 env/
+uv.lock
 
 # Environment configurations containing keys
 .env
