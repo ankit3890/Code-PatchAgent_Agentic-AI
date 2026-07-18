@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const apiBase = (window.location.protocol === "file:") ? "http://127.0.0.1:8000" : "";
+
     // Elements
     const repoForm = document.getElementById("index-form");
     const runForm = document.getElementById("run-form");
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load available collections
     async function loadCollections() {
         try {
-            const res = await fetch("/api/collections");
+            const res = await fetch(`${apiBase}/api/collections`);
             if (!res.ok) throw new Error("Failed to fetch collections");
             const data = await res.json();
             
@@ -124,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         appendLogLine("INFO | Handshaking with execution stream...", "info");
         
-        activeEventSource = new EventSource(`/api/stream/${sessionId}`);
+        activeEventSource = new EventSource(`${apiBase}/api/stream/${sessionId}`);
         
         activeEventSource.onmessage = (event) => {
             try {
@@ -352,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("tab-btn-logs").click();
         
         try {
-            const res = await fetch("/api/index", {
+            const res = await fetch(`${apiBase}/api/index`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ repo_url: repoUrl, collection_name: collectionName })
@@ -393,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tabBtnPatches.setAttribute("disabled", "true");
         
         try {
-            const res = await fetch("/api/run", {
+            const res = await fetch(`${apiBase}/api/run`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ collection_name: colName, request: taskText })
@@ -417,7 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Load configuration values from server
     async function loadConfig() {
         try {
-            const res = await fetch("/api/config");
+            const res = await fetch(`${apiBase}/api/config`);
             if (!res.ok) throw new Error("Failed to load configuration");
             const data = await res.json();
             
@@ -464,7 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         
         try {
-            const res = await fetch("/api/config", {
+            const res = await fetch(`${apiBase}/api/config`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
