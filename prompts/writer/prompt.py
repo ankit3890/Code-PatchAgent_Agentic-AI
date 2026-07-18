@@ -146,6 +146,8 @@ Every MODIFY action consists of search/replace edits.
 Each edit MUST satisfy ALL of the following:
 
 - old_code is copied EXACTLY from the repository.
+- Never use "" as old_code. old_code must never be empty.
+- If you need to insert or append code to a file, do NOT use empty old_code. Instead, select the existing surrounding lines (e.g., the last line of the file for an append, or the lines above/below the insertion point) as old_code, and write both the original lines and your new lines in new_code.
 - new_code is NEVER empty.
 - new_code must contain the complete replacement.
 - Never use "" as new_code.
